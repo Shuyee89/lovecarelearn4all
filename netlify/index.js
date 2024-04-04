@@ -53,7 +53,7 @@ exports.handler = async (event) => {
     );
     console.log(data);
     console.log(typeof data);
-
+    //Enc Keys
     try {
       const descprivateKey = {
         kty: "EC",
