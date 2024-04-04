@@ -74,7 +74,7 @@ exports.handler = async (event) => {
       const dto = new TextDecoder().decode(plaintext);
       const result = await jose.decodeJwt(dto);
       const NRIC = console.log(result.sub.substring(2, 12));
-
+      //Return NRIC
       return {
         statusCode: 200,
         body: JSON.stringify({ data: NRIC }),
