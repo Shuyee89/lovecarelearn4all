@@ -10,10 +10,8 @@ export const Profile: React.FC = () => {
   useEffect(() => {
     const getMessage = async () => {
       const url = `/.netlify/functions/getIDToken?code=${code}`;
-      if (NRIC == null) {
-        const { data } = await axios.get(url);
-        setNRIC(data.data);
-      }
+      const { data } = await axios.get(url);
+      setNRIC(data.data);
     };
 
     getMessage();
