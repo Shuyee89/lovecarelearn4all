@@ -9,8 +9,11 @@ export const Profile: React.FC = () => {
     const getMessage = async () => {
       const code = queryParams.get("code");
       const url = `/.netlify/functions/getIDToken?code=${code}`;
-      const data = await axios.get(url);
-      console.log(data);
+      axios.get(url).then(function (response) {
+        console.log(response);
+      });
+      //   const data = await axios.get(url);
+      //   console.log(data);
     };
 
     getMessage();
