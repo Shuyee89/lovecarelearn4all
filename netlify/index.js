@@ -82,6 +82,7 @@ exports.handler = async (event) => {
           "Content-Type": "application/json",
         },
       };
+      //Return error
     } catch (e) {
       console.log(e);
     }
