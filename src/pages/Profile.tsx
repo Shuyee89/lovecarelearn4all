@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 export const Profile: React.FC = () => {
   const location = useLocation();
@@ -9,7 +10,6 @@ export const Profile: React.FC = () => {
   useEffect(() => {
     const getMessage = async () => {
       const code = queryParams.get("code");
-      const axios = require("axios");
       const url = `/.netlify/functions/getIDToken?code=${code}`;
       const { data } = await axios.get(url);
       console.log(data);
