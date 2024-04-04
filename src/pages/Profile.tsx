@@ -10,8 +10,7 @@ export const Profile: React.FC = () => {
       const code = queryParams.get("code");
       const url = `/.netlify/functions/getIDToken?code=${code}`;
       const { data } = await axios.get(url);
-      const info = await data.json();
-      console.log(info);
+      console.log(data);
     };
 
     getMessage();
