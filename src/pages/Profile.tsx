@@ -15,7 +15,7 @@ export const Profile: React.FC = () => {
     };
 
     getMessage();
-  });
+  }, []);
 
   return <div>Hello, {NRIC}</div>;
 };
