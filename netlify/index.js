@@ -38,7 +38,7 @@ exports.handler = async (event) => {
       url,
       new URLSearchParams({
         client_id: "tLRDBkf1CNy5Rsi34mEKuOD5EpQAwjIq",
-        redirect_uri: "https://spauth0.netlify.app",
+        redirect_uri: "https://lovecarelearn4all.netlify.app/Profile",
         code: code,
         client_assertion_type:
           "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
