@@ -6,16 +6,18 @@ export const Profile: React.FC = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [NRIC, setNRIC] = useState(null);
+  const code = queryParams.get("code");
   useEffect(() => {
     const getMessage = async () => {
-      const code = queryParams.get("code");
       const url = `/.netlify/functions/getIDToken?code=${code}`;
-      const { data } = await axios.get(url);
-      setNRIC(data.data);
+      if (NRIC == null) {
+        const { data } = await axios.get(url);
+        setNRIC(data.data);
+      }
     };
 
     getMessage();
-  }, []);
+  }, [code]);
 
   return <div>Hello, {NRIC}</div>;
 };
