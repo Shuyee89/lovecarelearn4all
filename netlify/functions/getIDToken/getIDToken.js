@@ -31,7 +31,7 @@ exports.handler = async (event) => {
       })
       .sign(privateKey);
 
-    console.log(jwt);
+    // console.log(jwt);
 
     const url = "https://stg-id.singpass.gov.sg/token";
     const { data } = await axios.post(
@@ -51,8 +51,8 @@ exports.handler = async (event) => {
         },
       }
     );
-    console.log(data);
-    console.log(typeof data);
+    // console.log(data);
+    // console.log(typeof data);
     //Enc Keys
     try {
       const descprivateKey = {
@@ -73,7 +73,7 @@ exports.handler = async (event) => {
       );
       const dto = new TextDecoder().decode(plaintext);
       const result = await jose.decodeJwt(dto);
-      const NRIC = console.log(result.sub.substring(2, 12));
+      const NRIC = console.log(result.sub.substring(2, 11));
       //Return NRIC
       return {
         statusCode: 200,

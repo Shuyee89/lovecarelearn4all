@@ -5,13 +5,11 @@ import axios from "axios";
 export const Profile: React.FC = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const code = queryParams.get("code");
-  console.log(code);
   useEffect(() => {
     const getMessage = async () => {
       const code = queryParams.get("code");
       const url = `/.netlify/functions/getIDToken?code=${code}`;
-      const { data } = await axios.get(url);
+      const data = await axios.get(url);
       console.log(data);
     };
 
