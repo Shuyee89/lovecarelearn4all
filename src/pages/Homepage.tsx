@@ -1,8 +1,8 @@
 import React from "react";
 import { Header } from "../components/header";
-import TodoList from "../components/TodoList";
-import AddTodo from "../components/AddTodo";
-import logo from "/images/Parenthood.png";
+// import TodoList from "../components/TodoList";
+// import AddTodo from "../components/AddTodo";
+
 import {
   VStack,
   Card,
@@ -11,7 +11,6 @@ import {
   Container,
   Heading,
   Stack,
-  Center,
 } from "@chakra-ui/react";
 import {
   Tabs,
@@ -20,7 +19,6 @@ import {
   Tab,
   TabPanel,
   TabIndicator,
-  IconButton,
   Image,
   Button,
   Spacer,
