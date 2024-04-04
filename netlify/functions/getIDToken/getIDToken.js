@@ -75,15 +75,15 @@ exports.handler = async (event) => {
       const result = await jose.decodeJwt(dto);
       const NRIC = console.log(result.sub.substring(2, 11));
       console.log(NRIC);
-      return new Response("Youre visiting");
+      // return new Response("Youre visiting");
       //Return NRIC
-      // return {
-      //   statusCode: 200,
-      //   body: JSON.stringify({ data: NRIC }),
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // };
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ data: NRIC }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
       //Return error
     } catch (e) {
       console.log(e);
