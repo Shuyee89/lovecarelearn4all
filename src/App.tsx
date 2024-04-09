@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./pages/Homepage";
 import Profile from "./pages/Profile";
+import Profiletest from "./pages/Profiletest";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -9,6 +10,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
+        <Route path="/Profiletest" element={<Profiletest />}></Route>
       </Routes>
     </BrowserRouter>
   );

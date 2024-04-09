@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
 import { Subheader } from "../components/subheader";
 import { Heading, Center, VStack } from "@chakra-ui/react";
 import TodoList from "../components/TodoList";
 import AddTodo from "../components/AddTodo";
 
 export const Profile: React.FC = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const [NRIC, setNRIC] = useState(null);
-  const code = queryParams.get("code");
-
   const initialtodo = [
     {
       id: "1",
@@ -19,21 +12,20 @@ export const Profile: React.FC = () => {
     },
   ];
 
+  //   const initialtodo2 = [
+  //     {
+  //       id: "1",
+  //       body: "Stand u2p and Stretch even 30 mins",
+  //     },
+  //   ];
+
   interface todo {
     id: string;
     body: string;
   }
-
-  useEffect(() => {
-    const getMessage = async () => {
-      const url = `/.netlify/functions/getIDToken?code=${code}`;
-      const { data } = await axios.get(url);
-      setNRIC(data.data);
-    };
-
-    getMessage();
-  }, [code]);
-
+  //   const isEmptyArray = (obj: any): boolean => {
+  //     return Array.isArray(obj) && obj.length === 0;
+  //   };
   const [todos, setTodos] = useState(() => {
     const newtodo: any = localStorage.getItem("todos");
     return newtodo ? JSON.parse(newtodo) : initialtodo;
@@ -61,7 +53,7 @@ export const Profile: React.FC = () => {
       <VStack>
         <Center>
           <Heading as="h5" size="sm" marginTop={5}>
-            Hello, {NRIC}
+            Hello, Testing Page
           </Heading>
         </Center>
         <TodoList todos={todos} deleteToDo={deleteToDo} />
