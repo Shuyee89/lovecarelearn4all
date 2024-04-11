@@ -37,7 +37,7 @@ export const Homepage: React.FC = () => {
     body: string;
   }
 
-  interface Profile{
+  interface Profile {
     loadingState: string;
     NRIC: string;
   }
@@ -56,9 +56,11 @@ export const Homepage: React.FC = () => {
       const { data } = await axios.get(url);
       setNRIC(data.data);
       setLoadingState("loaded");
+  
     };
 
     getMessage();
+    
   }, [code]);
   useEffect(() => {
     // Retrieve item from localStorage

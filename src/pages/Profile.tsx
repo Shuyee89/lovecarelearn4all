@@ -8,7 +8,7 @@ interface ProfileProps {
 }
 
 export const Profile: React.FC<ProfileProps> = ({ loadingState, NRIC }) => {
-  console.log(NRIC);
+  console.log(loadingState + NRIC);
   return (
     <div>
       <VStack>
