@@ -63,7 +63,11 @@ export const Profile: React.FC = () => {
       <Subheader />
       <VStack>
         <Center>
-          {loadingState !== "loaded" && <Spinner color="red.500" />}
+          {loadingState !== "loaded" && (
+            <Heading as="h5" size="sm" marginTop={5}>
+              <Spinner color="red.500" />
+            </Heading>
+          )}
           {loadingState === "loaded" && (
             <Heading as="h5" size="sm" marginTop={5}>
               Hello, {NRIC}
