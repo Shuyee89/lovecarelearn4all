@@ -62,7 +62,7 @@ const Homepage = () => {
                         colorScheme="gray"
                         onClick={() =>
                           (window.location.href =
-                            "https://stg-id.singpass.gov.sg/auth?scope=openid&state=30e370f9-e38a-42a5-98d2-3cc8d2a75ed4&response_type=code&redirect_uri=https://lovecarelearn4all.netlify.app/Profile&client_id=tLRDBkf1CNy5Rsi34mEKuOD5EpQAwjIq&nonce=" +
+                            "https://stg-id.singpass.gov.sg/auth?scope=openid&state=30e370f9-e38a-42a5-98d2-3cc8d2a75ed4&response_type=code&redirect_uri=https://lovecarelearn4all.netlify.app/Homepage&client_id=tLRDBkf1CNy5Rsi34mEKuOD5EpQAwjIq&nonce=" +
                             crypto.randomUUID())
                         }
                       >
