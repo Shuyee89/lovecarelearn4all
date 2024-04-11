@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { Subheader } from "../components/subheader";
-import { Heading, Center, VStack } from "@chakra-ui/react";
+import { Heading, Center, VStack, Spinner } from "@chakra-ui/react";
 import TodoList from "../components/TodoList";
 import AddTodo from "../components/AddTodo";
 
@@ -11,11 +11,12 @@ export const Profile: React.FC = () => {
   const queryParams = new URLSearchParams(location.search);
   const [NRIC, setNRIC] = useState(null);
   const code = queryParams.get("code");
+  const [loadingState, setLoadingState] = useState("not_loaded");
 
   const initialtodo = [
     {
       id: "1",
-      body: "Stand up and Stretch even 30 mins",
+      body: "Stand up and Stretch every 30 mins",
     },
   ];
 
@@ -25,10 +26,12 @@ export const Profile: React.FC = () => {
   }
 
   useEffect(() => {
+    setLoadingState("loading");
     const getMessage = async () => {
       const url = `/.netlify/functions/getIDToken?code=${code}`;
       const { data } = await axios.get(url);
       setNRIC(data.data);
+      setLoadingState("loaded");
     };
 
     getMessage();
@@ -57,16 +60,21 @@ export const Profile: React.FC = () => {
 
   return (
     <div>
-      <Subheader />
-      <VStack>
-        <Center>
-          <Heading as="h5" size="sm" marginTop={5}>
-            Hello, {NRIC}
-          </Heading>
-        </Center>
-        <TodoList todos={todos} deleteToDo={deleteToDo} />
-        <AddTodo AddToDo={AddToDo} />
-      </VStack>
+      {loadingState === "loaded" && (
+        <div>
+          <Subheader />
+          <VStack>
+            <Center>
+              <Heading as="h5" size="sm" marginTop={5}>
+                Hello, <Spinner color="red.500" />
+                {NRIC}
+              </Heading>
+            </Center>
+            <TodoList todos={todos} deleteToDo={deleteToDo} />
+            <AddTodo AddToDo={AddToDo} />
+          </VStack>
+        </div>
+      )}
     </div>
   );
 };
