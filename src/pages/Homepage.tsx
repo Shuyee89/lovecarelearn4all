@@ -36,6 +36,11 @@ export const Homepage: React.FC = () => {
     id: string;
     body: string;
   }
+
+  interface Profile{
+    loadingState: string;
+    NRIC: string;
+  }
   //   const isEmptyArray = (obj: any): boolean => {
   //     return Array.isArray(obj) && obj.length === 0;
   //   };
@@ -50,7 +55,6 @@ export const Homepage: React.FC = () => {
       const url = `/.netlify/functions/getIDToken?code=${code}`;
       const { data } = await axios.get(url);
       setNRIC(data.data);
-      console.log("this" + NRIC);
       setLoadingState("loaded");
     };
 
