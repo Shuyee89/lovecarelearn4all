@@ -60,21 +60,19 @@ export const Profile: React.FC = () => {
 
   return (
     <div>
-      {loadingState === "loaded" && (
-        <div>
-          <Subheader />
-          <VStack>
-            <Center>
-              <Heading as="h5" size="sm" marginTop={5}>
-                Hello, <Spinner color="red.500" />
-                {NRIC}
-              </Heading>
-            </Center>
-            <TodoList todos={todos} deleteToDo={deleteToDo} />
-            <AddTodo AddToDo={AddToDo} />
-          </VStack>
-        </div>
-      )}
+      <Subheader />
+      <VStack>
+        <Center>
+          {loadingState !== "loaded" && <Spinner color="red.500" />}
+          {loadingState === "loaded" && (
+            <Heading as="h5" size="sm" marginTop={5}>
+              Hello, {NRIC}
+            </Heading>
+          )}
+        </Center>
+        <TodoList todos={todos} deleteToDo={deleteToDo} />
+        <AddTodo AddToDo={AddToDo} />
+      </VStack>
     </div>
   );
 };
