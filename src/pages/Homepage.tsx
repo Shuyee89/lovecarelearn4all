@@ -1,102 +1,147 @@
-import React from "react";
-import { Header } from "../components/header";
-// import AddTodo from "../components/AddTodo";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { Image, Flex, Heading, Box, Center } from "@chakra-ui/react";
 import {
-  VStack,
-  Card,
-  CardBody,
-  Text,
-  Container,
-  Heading,
-  Stack,
-} from "@chakra-ui/react";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  TabIndicator,
-  Image,
+  Menu,
+  MenuButton,
   Button,
-  Spacer,
-  Box,
+  useColorMode,
+  IconButton,
+  VStack,
 } from "@chakra-ui/react";
+import { FaSun, FaMoon } from "react-icons/fa";
+import Payment from "../pages/Payment";
+// import TestProfile from "../pages/Profiletest";
+import Profile from "../pages/Profile";
+import TodoList from "../components/TodoList";
+import AddTodo from "../components/AddTodo";
 
-const Homepage = () => {
+export const Homepage: React.FC = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const [NRIC, setNRIC] = useState("");
+  const code = queryParams.get("code");
+  const { colorMode, toggleColorMode } = useColorMode();
+  const [showSubComponent, setShowSubComponent] = useState("menu1");
+  const [loadingState, setLoadingState] = useState("not_loaded");
+
+  const initialtodo = [
+    {
+      id: "1",
+      body: "Stand up and Stretch even 30 mins",
+    },
+  ];
+  interface todo {
+    id: string;
+    body: string;
+  }
+  //   const isEmptyArray = (obj: any): boolean => {
+  //     return Array.isArray(obj) && obj.length === 0;
+  //   };
+  const [todos, setTodos] = useState(() => {
+    const newtodo: any = localStorage.getItem("todos");
+    return newtodo ? JSON.parse(newtodo) : initialtodo;
+  });
+
+  useEffect(() => {
+    setLoadingState("loading");
+    const getMessage = async () => {
+      const url = `/.netlify/functions/getIDToken?code=${code}`;
+      const { data } = await axios.get(url);
+      setNRIC(data.data);
+      setLoadingState("loaded");
+    };
+
+    getMessage();
+  }, [code]);
+  useEffect(() => {
+    // Retrieve item from localStorage
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  function deleteToDo(id: string) {
+    const newTodos = todos.filter((todo: any) => {
+      return todo.id !== id;
+    });
+    setTodos(newTodos);
+  }
+
+  function AddToDo(todo: todo) {
+    setTodos([...todos, todo]);
+  }
+
   return (
-    <Box>
-      <Header />
+    <Box w="100%">
+      <Flex>
+        <Image borderRadius="full" boxSize="80px" src="images/Parenthood.png" />
+        <Center>
+          <Menu>
+            <MenuButton
+              as={Button}
+              marginLeft={5}
+              variant="outline"
+              onClick={() => {
+                setShowSubComponent("menu1");
+                console.log(showSubComponent);
+              }}
+            >
+              Menu 1
+            </MenuButton>
+            <MenuButton
+              as={Button}
+              marginLeft={5}
+              variant="outline"
+              onClick={() => {
+                setShowSubComponent("menu2");
+                console.log(showSubComponent);
+              }}
+            >
+              Payment
+            </MenuButton>
+            <MenuButton
+              as={Button}
+              marginLeft={5}
+              variant="outline"
+              onClick={() => {
+                setShowSubComponent("menu3");
+              }}
+            >
+              Menu 3
+            </MenuButton>
+          </Menu>
+        </Center>
+        <IconButton
+          icon={colorMode === "light" ? <FaSun /> : <FaMoon />}
+          isRound={true}
+          size="sm"
+          alignSelf="center"
+          aria-label="ColorMode"
+          onClick={toggleColorMode}
+          marginLeft={5}
+        ></IconButton>
+      </Flex>
+
+      <Heading
+        padding="2"
+        fontWeight="extrabold"
+        size="md"
+        bgGradient="linear(to-l, #7928CA, #FF0080)"
+      >
+        Love . Care . Learn
+      </Heading>
       <VStack>
-        <Spacer />
-        <Tabs align="center" isFitted>
-          <TabList>
-            <Tab _selected={{ color: "black" }}>About</Tab>
-            <Tab _selected={{ color: "black" }}>Contact</Tab>
-          </TabList>
-          <TabIndicator
-            mt="-1.5px"
-            height="2px"
-            bgGradient="linear(to-l, #7928CA, #FF0080)"
-            borderRadius="1px"
-          />
-          <TabPanels>
-            <TabPanel>
-              <Container minW="container.md">
-                <Card>
-                  <CardBody>
-                    <Stack spacing="1">
-                      <Heading>Welcome!</Heading>
-                      <Text as="kbd">Love.Care.Learn </Text>
-                      <Text>
-                        This is your go-to destination for all things parenting!
-                        Parenthood is a journey filled with joy, challenges, and
-                        countless precious moments. Explore our extensive
-                        collection and tools where you can use for day to day
-                        parenting needs. Together, let's celebrate the joys of
-                        parenthood and support each other through the inevitable
-                        twists and turns along the way. We're thrilled to embark
-                        on this journey with you!
-                      </Text>
-                      <Button
-                        borderColor="red.600"
-                        border="2px"
-                        colorScheme="gray"
-                        onClick={() =>
-                          (window.location.href =
-                            "https://stg-id.singpass.gov.sg/auth?scope=openid&state=30e370f9-e38a-42a5-98d2-3cc8d2a75ed4&response_type=code&redirect_uri=https://lovecarelearn4all.netlify.app/Profile&client_id=tLRDBkf1CNy5Rsi34mEKuOD5EpQAwjIq&nonce=" +
-                            crypto.randomUUID())
-                        }
-                      >
-                        Login with
-                        <Image
-                          src="/images/Singpass-logo.png"
-                          width="105px"
-                          height="20px"
-                          paddingLeft="5px"
-                          paddingTop="3px"
-                        />
-                      </Button>
-                    </Stack>
-                  </CardBody>
-                </Card>
-              </Container>
-            </TabPanel>
-            <TabPanel>
-              <Container minW="container.md">
-                <Card>
-                  <CardBody>
-                    <Text>
-                      Drop an email to <Text as="b">deena.lsy7@gmail.com</Text>
-                      for any enquiries.
-                    </Text>
-                  </CardBody>
-                </Card>
-              </Container>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <Profile loadingState={loadingState} NRIC={NRIC} />
+        {/* <TestProfile /> */}
+        {showSubComponent === "menu1" ? (
+          <>
+            <TodoList todos={todos} deleteToDo={deleteToDo} />
+            <AddTodo AddToDo={AddToDo} />
+          </>
+        ) : (
+          <></>
+        )}
+        {showSubComponent === "menu2" ? <Payment /> : <></>}
       </VStack>
     </Box>
   );

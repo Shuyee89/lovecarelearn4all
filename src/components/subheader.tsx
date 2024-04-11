@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, Flex, Heading, Box, Center } from "@chakra-ui/react";
 import {
   Menu,
@@ -8,9 +8,12 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import Payment from "../pages/Payment";
 
 export const Subheader: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const [showSubComponent, setShowSubComponent] = useState(false);
+
   return (
     <Box w="100%">
       <Flex>
@@ -20,8 +23,15 @@ export const Subheader: React.FC = () => {
             <MenuButton as={Button} marginLeft={5} variant="outline">
               Menu 1
             </MenuButton>
-            <MenuButton as={Button} marginLeft={5} variant="outline">
-              Menu 2
+            <MenuButton
+              as={Button}
+              marginLeft={5}
+              variant="outline"
+              onClick={() => {
+                setShowSubComponent(true);
+              }}
+            >
+              Payment
             </MenuButton>
             <MenuButton as={Button} marginLeft={5} variant="outline">
               Menu 3
@@ -47,6 +57,7 @@ export const Subheader: React.FC = () => {
       >
         Love . Care . Learn
       </Heading>
+      {showSubComponent && <Payment />}
     </Box>
   );
 };
