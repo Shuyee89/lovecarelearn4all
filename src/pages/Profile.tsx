@@ -7,7 +7,7 @@ interface ProfileProps {
   NRIC: string;
 }
 
-export const Profile: React.FC<ProfileProps> = ({ loadingState }, { NRIC }) => {
+export const Profile: React.FC<ProfileProps> = ({ loadingState, NRIC }) => {
   console.log(NRIC);
   return (
     <div>

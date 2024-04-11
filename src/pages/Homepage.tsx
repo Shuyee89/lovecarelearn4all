@@ -50,6 +50,7 @@ export const Homepage: React.FC = () => {
       const url = `/.netlify/functions/getIDToken?code=${code}`;
       const { data } = await axios.get(url);
       setNRIC(data.data);
+      console.log("this" + NRIC);
       setLoadingState("loaded");
     };
 
