@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { Center, VStack} from "@chakra-ui/react";
+import { Center, VStack } from "@chakra-ui/react";
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
@@ -13,6 +13,7 @@ const stripePromise = loadStripe(
 export const Payment: React.FC = () => {
   const fetchClientSecret = useCallback(() => {
     // Create a Checkout Session
+    // return fetch("/.netlify/functions/getStripePayment", {
     return fetch("/.netlify/functions/getStripePayment", {
       method: "POST",
     })
@@ -23,12 +24,12 @@ export const Payment: React.FC = () => {
 
   return (
     <div>
-     <VStack>
+      <VStack>
         <Center>
-      <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
-        <EmbeddedCheckout />
-      </EmbeddedCheckoutProvider>
-      </Center>
+          <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
+            <EmbeddedCheckout />
+          </EmbeddedCheckoutProvider>
+        </Center>
       </VStack>
     </div>
   );
