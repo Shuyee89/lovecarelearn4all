@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
   try {
     const sessionid = event.queryStringParameters.session_id;
     const session = await stripe.checkout.sessions.retrieve(sessionid);
-
+    console.log(sessionid);
     return {
       statusCode: 200,
       body: JSON.stringify({
