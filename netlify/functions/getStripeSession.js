@@ -6,7 +6,7 @@ const stripe = require("stripe")(
 exports.handler = async (event, context) => {
   try {
     const sessionid = event.queryStringParameters.session_id;
-    console.log(sessionid);
+    console.log("A" + sessionid);
     const session = await stripe.checkout.sessions.retrieve(sessionid);
     const email = session.customer_details.email;
     const ps = session.payment_status;
