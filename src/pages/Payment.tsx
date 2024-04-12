@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { Center, VStack} from "@chakra-ui/react";
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
@@ -22,10 +23,13 @@ export const Payment: React.FC = () => {
 
   return (
     <div>
-      {" "}
+     <VStack>
+        <Center>
       <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
+      </Center>
+      </VStack>
     </div>
   );
 };
