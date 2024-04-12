@@ -6,15 +6,16 @@ const stripe = require("stripe")(
 exports.handler = async (event, context) => {
   try {
     const sessionid = event.queryStringParameters.session_id;
-    console.log(sessionid);
     const session = await stripe.checkout.sessions.retrieve(sessionid);
-
+    console.log(session.status);
+    console.log(session.customer_details.email);
     return {
       statusCode: 200,
-      body: JSON.stringify({ data: {
-        status: session.status,
-        customer_email: session.customer_details.email
-      }
+      body: JSON.stringify({
+        data: {
+          status: session.status,
+          customer_email: session.customer_details.email,
+        },
       }),
       headers: {
         "Content-Type": "application/json",
