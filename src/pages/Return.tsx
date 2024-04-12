@@ -5,12 +5,12 @@ const Return = () => {
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
-  useEffect(() => {
+  useEffect(() => {   
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
-    fetch(`/.netlify/functions/getStripeSession?session_id=${sessionId}`)
+    fetch("/.netlify/functions/getStripeSession?session_id="+{sessionId})
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.status);
