@@ -16,7 +16,8 @@ const Return = () => {
         setCustomerEmail(data.data.customer_email);
       });
   }, []);
-
+  console.log(status);
+  console.log(customerEmail);
   if (status === "open") {
     return <Navigate to="/checkout" />;
   }

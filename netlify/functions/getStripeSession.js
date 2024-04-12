@@ -7,16 +7,12 @@ exports.handler = async (event, context) => {
   try {
     const sessionid = event.queryStringParameters.session_id;
     const session = await stripe.checkout.sessions.retrieve(sessionid);
-    const email = session.customer_details.email;
-    const ps = session.payment_status;
-    console.log("B" + ps);
-    console.log("C" +email);
     return {
       statusCode: 200,
       body: JSON.stringify({
         data: {
-          status: session.status,
-          customer_email: session.customer_details.email,
+          status: session.payment_status,
+          customer_email: session.customer_email,
         },
       }),
       headers: {
