@@ -13,8 +13,8 @@ const Return = () => {
       // fetch(`/.netlify/functions/getStripeSession?session_id=" + ${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
-        setStatus(data.data.status);
-        setCustomerEmail(data.data.customer_email);;
+        setStatus(data.status);
+        setCustomerEmail(data.customer_email);;
       });
   }, []);
 
@@ -33,7 +33,7 @@ const Return = () => {
       </section>
     );
   }
-
+  console.log(status);
   return <div>nothing</div>;
 };
 
