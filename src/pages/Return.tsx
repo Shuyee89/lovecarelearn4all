@@ -14,8 +14,6 @@ const Return = () => {
       .then((data) => {
         setStatus(data.data.status);
         setCustomerEmail(data.data.customer_email);
-        console.log(status);
-        console.log(customerEmail);
       });
   }, []);
 
