@@ -14,7 +14,7 @@ const Return = () => {
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.data);
-        setCustomerEmail("A");;
+        setCustomerEmail("A");
       });
   }, []);
 
@@ -22,7 +22,7 @@ const Return = () => {
     return <Navigate to="/checkout" />;
   }
 
-  if (status === "complete") {
+  if (status === "paid") {
     return (
       <section id="success">
         <p>
@@ -33,7 +33,6 @@ const Return = () => {
       </section>
     );
   }
-  console.log(status);
   return <div>nothing</div>;
 };
 
