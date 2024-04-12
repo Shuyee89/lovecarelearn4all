@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     });
     return {
       statusCode: 200,
-      body: JSON.stringify({ data: {clientSecret: session.client_secret}}),
+      body: JSON.stringify({clientSecret: session.client_secret}),
       headers: {
         "Content-Type": "application/json",
       },
