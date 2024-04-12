@@ -12,12 +12,13 @@ const Return = () => {
     fetch(`/.netlify/functions/getStripeSession?session_id=" + ${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
-        setStatus(data.data.status);
-        setCustomerEmail(data.data.customer_email);
+        setStatus(data.status);
+        setCustomerEmail(data.customer_email);
       });
+    console.log(status);
+    console.log(customerEmail);
   }, []);
-  console.log(status);
-  console.log(customerEmail);
+
   if (status === "open") {
     return <Navigate to="/checkout" />;
   }
