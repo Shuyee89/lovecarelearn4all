@@ -9,7 +9,6 @@ const Return = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
-    console.log("here");
     fetch("/.netlify/functions/getStripeSession?session_id=" + { sessionId })
       .then((res) => res.json())
       .then((data) => {
@@ -17,7 +16,8 @@ const Return = () => {
         setCustomerEmail(data.customer_email);
       });
   }, []);
-
+  console.log(status);
+  console.log(customerEmail);
   if (status === "open") {
     return <Navigate to="/checkout" />;
   }
