@@ -13,7 +13,6 @@ const stripePromise = loadStripe(
 export const Payment: React.FC = () => {
   const fetchClientSecret = useCallback(() => {
     // Create a Checkout Session
-    // return fetch("/.netlify/functions/getStripePayment", {
     return fetch("/.netlify/functions/getStripePayment", {
       method: "POST",
     })
