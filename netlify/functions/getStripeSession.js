@@ -10,10 +10,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        data: {
-          status: session.payment_status,
-          customer_email: session.customer_email,
-        },
+        data: session.payment_status
       }),
       headers: {
         "Content-Type": "application/json",

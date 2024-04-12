@@ -12,11 +12,9 @@ const Return = () => {
     fetch(`/.netlify/functions/getStripeSession?session_id=" + ${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
-        setStatus(data.status);
-        setCustomerEmail(data.customer_email);
+        setStatus(data.data);
+        setCustomerEmail("");
       });
-    console.log(status);
-    console.log(customerEmail);
   }, []);
 
   if (status === "open") {
