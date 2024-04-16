@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
     const session = await stripe.checkout.sessions.retrieve(sessionid);
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: session.payment_status, email: "ajj" }),
+      body: JSON.stringify({ status: session.payment_status, email: session.customer_details.email }),
       headers: {
         "Content-Type": "application/json",
       },
