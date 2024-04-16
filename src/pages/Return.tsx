@@ -13,9 +13,9 @@ const Return = () => {
       // fetch(`/.netlify/functions/getStripeSession?session_id=" + ${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
-        setStatus(data.data);
-        setCustomerEmail(data.data1);
-        console.log(data.data1);
+        setStatus(data.status);
+        setCustomerEmail(data.email);
+        console.log(data.email);
       });
   }, []);
 
