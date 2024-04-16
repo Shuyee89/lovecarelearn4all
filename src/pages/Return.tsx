@@ -17,7 +17,7 @@ const Return = () => {
     navigate("/Homepage");
   };
 
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Return = () => {
           </Center>
         </Box>
       )}
-      {status !== "paid" && <Navigate to="/Homepage" />}
+      {status === "unpaid" && <Navigate to="/Homepage" />}
     </VStack>
   );
 };
