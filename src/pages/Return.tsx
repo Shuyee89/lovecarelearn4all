@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import {
+  VStack,
+  Alert,
+  Center,
+  AlertIcon,
+  Button,
+  Box,
+} from "@chakra-ui/react";
+import { Header } from "../components/header";
 
 const Return = () => {
-  const [status, setStatus] = useState(null);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    // Navigate to the desired page
+    navigate("/Homepage");
+  };
+
+  const [status, setStatus] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
 
   useEffect(() => {
@@ -15,26 +30,35 @@ const Return = () => {
       .then((data) => {
         setStatus(data.status);
         setCustomerEmail(data.email);
-        console.log(data.email);
       });
   }, []);
 
-  if (status === "open") {
-    return <Navigate to="/checkout" />;
-  }
-
-  if (status === "paid") {
-    return (
-      <section id="success">
-        <p>
-          We appreciate your business! A confirmation email will be sent to{" "}
-          {customerEmail}. If you have any questions, please email{" "}
-          <a href="mailto:orders@example.com">deena.lsy7@gmail.com</a>.
-        </p>
-      </section>
-    );
-  }
-  return <div>nothing</div>;
+  return (
+    <VStack>
+      <Header />
+      {status === "paid" && (
+        <Box>
+          <Alert status="success">
+            <AlertIcon />
+            We appreciate your business! A confirmation email will be sent to{" "}
+            {customerEmail}. If you have any questions, please email{" "}
+            deena.lsy7@gmail.com
+          </Alert>
+          <Center>
+            <Button
+              colorScheme="teal"
+              variant="outline"
+              marginTop="10px"
+              onClick={handleClick}
+            >
+              Return to Homepage
+            </Button>
+          </Center>
+        </Box>
+      )}
+      {status !== "paid" && <Navigate to="/Homepage" />}
+    </VStack>
+  );
 };
 
 export default Return;
