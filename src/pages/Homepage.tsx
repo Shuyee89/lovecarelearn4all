@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 import { Image, Flex, Heading, Box, Center } from "@chakra-ui/react";
 import {
   Menu,
@@ -12,19 +12,20 @@ import {
 } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import Payment from "../pages/Payment";
-import TestProfile from "../pages/Profiletest";
-// import Profile from "../pages/Profile";
+//import TestProfile from "../pages/Profiletest";
+import Profile from "../pages/Profile";
 import TodoList from "../components/TodoList";
 import AddTodo from "../components/AddTodo";
+import Other from  "../pages/Other";
 
 export const Homepage: React.FC = () => {
   //SP
-  // const location = useLocation();
-  // const queryParams = new URLSearchParams(location.search);
-  // const [NRIC, setNRIC] = useState("");
-  // const code = queryParams.get("code");
-  // const [loadingState, setLoadingState] = useState("not_loaded");
-  // const [variant, setVariant] = useState("outline");
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const [NRIC, setNRIC] = useState("");
+  const code = queryParams.get("code");
+  const [loadingState, setLoadingState] = useState("not_loaded");
+
 
   const { colorMode, toggleColorMode } = useColorMode();
   const [showSubComponent, setShowSubComponent] = useState("menu1");
@@ -43,29 +44,29 @@ export const Homepage: React.FC = () => {
     body: string;
   }
   //SP
-  // interface Profile {
-  //   loadingState: string;
-  //   NRIC: string;
-  // }
-  //   const isEmptyArray = (obj: any): boolean => {
-  //     return Array.isArray(obj) && obj.length === 0;
-  //   };
+  interface Profile {
+    loadingState: string;
+    NRIC: string;
+  }
+    // const isEmptyArray = (obj: any): boolean => {
+    //   return Array.isArray(obj) && obj.length === 0;
+    // };
   const [todos, setTodos] = useState(() => {
     const newtodo: any = localStorage.getItem("todos");
     return newtodo ? JSON.parse(newtodo) : initialtodo;
   });
 
-  //   useEffect(() => {
-  //     setLoadingState("loading");
-  //     const getMessage = async () => {
-  //       const url = `/.netlify/functions/getIDToken?code=${code}`;
-  //       const { data } = await axios.get(url);
-  //       setNRIC(data.data);
-  //       setLoadingState("loaded");
-  //     };
+    useEffect(() => {
+      setLoadingState("loading");
+      const getMessage = async () => {
+        const url = `/.netlify/functions/getIDToken?code=${code}`;
+        const { data } = await axios.get(url);
+        setNRIC(data.data);
+        setLoadingState("loaded");
+      };
 
-  //     getMessage();
-  //   }, [code]);
+      getMessage();
+    }, [code]);
   useEffect(() => {
     // Retrieve item from localStorage
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -155,8 +156,8 @@ export const Homepage: React.FC = () => {
         Love . Care . Learn
       </Heading>
       <VStack>
-        {/* <Profile loadingState={loadingState} NRIC={NRIC} /> */}
-        <TestProfile />
+        <Profile loadingState={loadingState} NRIC={NRIC} />
+        {/* <TestProfile /> */}
         {showSubComponent === "menu1" ? (
           <>
             <TodoList todos={todos} deleteToDo={deleteToDo} />
@@ -166,6 +167,7 @@ export const Homepage: React.FC = () => {
           <></>
         )}
         {showSubComponent === "menu2" ? <Payment /> : <></>}
+        {showSubComponent === "menu3" ? <Other /> : <></>}
       </VStack>
     </Box>
   );
