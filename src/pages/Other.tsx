@@ -41,7 +41,7 @@ const Other = () => {
     return codeChallenge1;
   }
 
-  const authApiUrl = "https://test.api.myinfo.gov.sg/com/v4/authorize";
+  const authApiUrl = "https://staging.api.myinfo.gov.sg/com/v4/authorize";
   const clientId = "PROD-R28SM8022K-DEEMYINFOTESTAPP";
   const redirectUrl = "https://lovecarelearn4all.netlify.app/callback";
   const purpose_id = "demonstration";
